@@ -12,31 +12,14 @@ void setupLights() {
   strip.begin();
   strip.show();
   clearStrip();
-  setUpper(strip.Color(250, 125, 25));
-  writeLights();
+  setupRainbowFade();
+  loopRainbowFade();
+  //setupSpacedPulses();
 }
 
-int pos = 0;
-int inc = 1;
-int times = 0;
 void loopLights() {
-  incrementLower();
-  if(times%2 == 0)lowerLights[0] = strip.Color(0, pos*2.5, 0);//should max at ~50
-  if(times%2 == 1)lowerLights[0] = strip.Color(pos*2.5, 0, 0);
-  pos+=inc;
-  if(pos == 16) inc = -1;
-  else if(pos == 0) {
-    inc = 1;
-    times++;
-    int blank = random(50);
-    for(int i = 0; i < blank; i++) {
-      incrementLower();
-      writeLights();
-      delay(35);
-    }
-  }
-  writeLights();
-  delay(35);
+  loopRainbowFade();
+  //loopSpacedPulses();
 }
 
 void writeLights() {
@@ -76,28 +59,4 @@ void clearStrip() {
   strip.show();
 }
 
-void rainbow(uint8_t wait) {
-  uint16_t i, j;
 
-  for(j=0; j<256; j++) {
-    for(i=0; i<LOWER_LENGTH; i++) {
-      lowerLights[i] = (Wheel((i+j) & 255));
-      httpServer.handleClient();
-    }
-    writeLights();
-    delay(wait);
-  }
-}
-
-uint32_t Wheel(byte WheelPos) {
-  WheelPos = 255 - WheelPos;
-  if(WheelPos < 85) {
-    return strip.Color((255 - WheelPos * 3)/5, 0, (WheelPos * 3)/5);
-  }
-  if(WheelPos < 170) {
-    WheelPos -= 85;
-    return strip.Color(0, (WheelPos * 3)/5, (255 - WheelPos * 3)/5);
-  }
-  WheelPos -= 170;
-  return strip.Color((WheelPos * 3)/5, (255 - WheelPos * 3)/5, 0);
-}

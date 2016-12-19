@@ -40,6 +40,6 @@ void setup(void){
 
 void loop(void){
   httpServer.handleClient();
-  //loopLights();
-  rainbow(20);
+  loopLights();
+  //rainbow(20);
 }

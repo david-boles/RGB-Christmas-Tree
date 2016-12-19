@@ -13,7 +13,7 @@ void setupLights() {
   strip.show();
   clearStrip();
   setupRainbowFade();
-  loopRainbowFade();
+  //loopRainbowFade();
   //setupSpacedPulses();
 }
 
@@ -43,6 +43,13 @@ void setUpper(uint32_t c) {
   }
 }
 
+void setLower(uint32_t c) {
+  for(int i = 0; i < LOWER_LENGTH; i++) {
+    lowerLights[i] = c;
+    httpServer.handleClient();
+  }
+}
+
 void incrementLower() {
   for(int i = LOWER_LENGTH-1; i > 0; i--) {
     lowerLights[i] = lowerLights[i-1];
@@ -52,11 +59,9 @@ void incrementLower() {
 }
 
 void clearStrip() {
-  for(int i = 0; i < strip.numPixels(); i++) {
-    strip.setPixelColor(i, 0);
-    httpServer.handleClient();
-  }
-  strip.show();
+  setLower(0);
+  setUpper(0);
+  writeLights();
 }
 
 

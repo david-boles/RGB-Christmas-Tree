@@ -1,4 +1,5 @@
 void setupRainbowFade() {
+  clearStrip();
   setUpper(strip.Color(250, 125, 25));
   writeLights();
 }

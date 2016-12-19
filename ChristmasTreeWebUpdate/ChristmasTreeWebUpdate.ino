@@ -31,6 +31,7 @@ void setup(void){
   MDNS.begin(host);
 
   httpUpdater.setup(&httpServer);
+  setupWebControl ();
   httpServer.begin();
 
   MDNS.addService("http", "tcp", 80);

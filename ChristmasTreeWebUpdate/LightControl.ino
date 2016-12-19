@@ -5,21 +5,48 @@
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(LOWER_LENGTH + UPPER_LENGTH, PIN, NEO_GRB + NEO_KHZ800);
 
+int animationMode = 0;
+
 int lowerLights[LOWER_LENGTH];
 int upperLights[UPPER_LENGTH];
 
 void setupLights() {
   strip.begin();
   strip.show();
-  clearStrip();
-  setupRainbowFade();
+  //clearStrip();
+  //setupRainbowFade();
   //loopRainbowFade();
   //setupSpacedPulses();
+  setupAnimation();
 }
 
+void setupAnimation() {
+  switch(animationMode) {
+    case 0:
+      setupRainbowFade();
+      break;
+    case 1:
+      setupSpacedPulses();
+      break;
+  }
+}
+
+bool enableLooping = true;
 void loopLights() {
-  loopRainbowFade();
+  //loopRainbowFade();
   //loopSpacedPulses();
+  if(enableLooping)loopAnimation();
+}
+
+void loopAnimation() {
+  switch(animationMode) {
+    case 0:
+      loopRainbowFade();
+      break;
+    case 1:
+      loopSpacedPulses();
+      break;
+  }
 }
 
 void writeLights() {

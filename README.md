@@ -1,5 +1,5 @@
 # RGB-Christmas-Tree
-The codebase for my RGB IOT christmas tree.
+The codebase for my [RGB IOT christmas tree](https://www.davidboles.space/site/portfolio/rgb-christmas-tree/).
 
 # Repo
 This is currently under heavy development in the dev branch. Master should stay relatively bug free but I won't be doing extensive documentation or even commenting for the time being.

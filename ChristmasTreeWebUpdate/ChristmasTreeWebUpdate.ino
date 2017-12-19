@@ -20,21 +20,23 @@ void setup(void){
   Serial.begin(115200);
   Serial.println();
   Serial.println("Booting Sketch...");
-  WiFi.mode(WIFI_AP_STA);
-  WiFi.begin(ssid, password);
+//  WiFi.mode(WIFI_AP_STA);
+//  WiFi.begin(ssid, password);
+//
+//  while(WiFi.waitForConnectResult() != WL_CONNECTED){
+//    WiFi.begin(ssid, password);
+//    Serial.println("WiFi failed, retrying.");
+//  }
+  WiFi.mode(WIFI_AP);
+  WiFi.softAP("RGB_Tree");
 
-  while(WiFi.waitForConnectResult() != WL_CONNECTED){
-    WiFi.begin(ssid, password);
-    Serial.println("WiFi failed, retrying.");
-  }
-
-  MDNS.begin(host);
+  //MDNS.begin(host);
 
   httpUpdater.setup(&httpServer);
   setupWebControl ();
   httpServer.begin();
 
-  MDNS.addService("http", "tcp", 80);
+  //MDNS.addService("http", "tcp", 80);
   Serial.printf("HTTPUpdateServer ready! Open http://%s.local/update in your browser\n", host);
   setupLights();
 }
@@ -42,5 +44,14 @@ void setup(void){
 void loop(void){
   httpServer.handleClient();
   loopLights();
+  //if (WiFi.status() != WL_CONNECTED) {reconnect();}
   //rainbow(20);
 }
+
+void reconnect() {
+  WiFi.disconnect();
+  WiFi.mode(WIFI_AP_STA); // added in V 3.1a to disable AP_SSID publication in Client mode - default was WIFI_AP_STA
+  WiFi.begin(ssid, password);  // connect to local WIFI Access Point
+  delay(1000);
+}
+

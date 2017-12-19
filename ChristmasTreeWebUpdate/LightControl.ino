@@ -1,7 +1,7 @@
 #include <Adafruit_NeoPixel.h>
 #define PIN 5
-#define LOWER_LENGTH 420
-#define UPPER_LENGTH 30
+#define LOWER_LENGTH 450
+#define UPPER_LENGTH 0
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(LOWER_LENGTH + UPPER_LENGTH, PIN, NEO_GRB + NEO_KHZ800);
 
@@ -28,6 +28,12 @@ void setupAnimation() {
     case 1:
       setupSpacedPulses();
       break;
+    case 2:
+      setupSolidWhite();
+      break;
+    case 3:
+      setupTwinkle();
+      break;
   }
 }
 
@@ -45,6 +51,9 @@ void loopAnimation() {
       break;
     case 1:
       loopSpacedPulses();
+      break;
+    case 3:
+      loopTwinkle();
       break;
   }
 }

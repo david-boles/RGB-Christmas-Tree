@@ -4,8 +4,8 @@ void setupWebControl () {
 }
 
 void animationHandler() {
-  if(httpServer.arg(0).toInt() != animationMode) {
-    animationMode = httpServer.arg(0).toInt();
+  if(httpServer.arg("mode").toInt() != animationMode) {
+    animationMode = httpServer.arg("mode").toInt();
     httpServer.send ( 200, "text/plain", "Setting!" );
     enableLooping = false;
     delay(200);
@@ -21,7 +21,7 @@ void controlHandler() {
 "<html>"
 "<body>"
 
-"  <h1>Control the Boles' Christmas Tree!</h1>"
+"  <h1>Control the Boles' Fireplace!</h1>"
 "  You must be connected to it's WiFi network. Also, switching off of Rainbow can take a little while :)"
 
 "  <br>"
@@ -29,7 +29,9 @@ void controlHandler() {
 "  <button id=\"rainbow\" onclick=\"setRainbow()\"><h2>Rainbow</h2></button><br>"
 "  <button id=\"cm_streams\" onclick=\"setStreams()\"><h2>Christmas Streams</h2></button><br>"
 "  <button id=\"blueish\" onclick=\"setBlueish()\"><h2>Solid Blueish</h2></button><br>"
-"  <button id=\"twinkle\" onclick=\"setTwinkle()\"><h2>Twinkle</h2></button>"
+"  <button id=\"twinkle\" onclick=\"setTwinkle()\"><h2>Twinkle</h2></button><br>"
+"  <button id=\"fire\" onclick=\"setFire()\"><h2>Fire</h2></button><br>"
+"  <button id=\"off\" onclick=\"setOff()\"><h2>Off</h2></button>"
 
 "  <br><br><br>"
   
@@ -40,11 +42,13 @@ void controlHandler() {
 "    function setStreams() {setMode(1);}"
 "    function setBlueish() {setMode(2);}"
 "    function setTwinkle() {setMode(3);}"
+"    function setFire() {setMode(4);}"
+"    function setOff() {setMode(-1);}"
     
 "    var xhr;"
 "    function setMode(mode) {"
 "      xhr = new XMLHttpRequest();"
-"      xhr.open('GET', \"http://192.168.4.1/set?=\" + mode, true);"
+"      xhr.open('GET', \"http://192.168.4.1/set?mode=\" + mode, true);"
 "      xhr.send();"
       
 "      xhr.addEventListener(\"readystatechange\", processRequest, false);"

@@ -1,11 +1,11 @@
 #include <Adafruit_NeoPixel.h>
 #define PIN 5
-#define LOWER_LENGTH 450
+#define LOWER_LENGTH 150//450
 #define UPPER_LENGTH 0
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(LOWER_LENGTH + UPPER_LENGTH, PIN, NEO_GRB + NEO_KHZ800);
 
-int animationMode = 0;
+int animationMode = 4;
 
 int lowerLights[LOWER_LENGTH];
 int upperLights[UPPER_LENGTH];
@@ -34,6 +34,13 @@ void setupAnimation() {
     case 3:
       setupTwinkle();
       break;
+    case 4:
+      setupFire();
+      break;
+    default:
+      clearStrip();
+      writeLights();
+      break;
   }
 }
 
@@ -54,6 +61,11 @@ void loopAnimation() {
       break;
     case 3:
       loopTwinkle();
+      break;
+    case 4:
+      loopFire();
+      break;
+    default:
       break;
   }
 }
@@ -99,5 +111,3 @@ void clearStrip() {
   setUpper(0);
   writeLights();
 }
-
-

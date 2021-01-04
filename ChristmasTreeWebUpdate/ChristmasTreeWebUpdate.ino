@@ -28,7 +28,7 @@ void setup(void){
 //    Serial.println("WiFi failed, retrying.");
 //  }
   WiFi.mode(WIFI_AP);
-  WiFi.softAP("RGB_Tree");
+  WiFi.softAP("Fireplace");
 
   //MDNS.begin(host);
 
@@ -54,4 +54,3 @@ void reconnect() {
   WiFi.begin(ssid, password);  // connect to local WIFI Access Point
   delay(1000);
 }
-

@@ -1,6 +1,6 @@
 #include <Adafruit_NeoPixel.h>
 #define PIN 5
-#define LOWER_LENGTH 150//450
+#define LOWER_LENGTH 103//about
 #define UPPER_LENGTH 0
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(LOWER_LENGTH + UPPER_LENGTH, PIN, NEO_GRB + NEO_KHZ800);
